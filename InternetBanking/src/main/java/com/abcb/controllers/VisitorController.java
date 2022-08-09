@@ -6,8 +6,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class VisitorController {
 
+	private String groupURL = "visitor/";
+
 	@RequestMapping("/")
 	String getHomepage() {
-		return "index";
+		return groupURL + "visitor-home";
 	}
 }
