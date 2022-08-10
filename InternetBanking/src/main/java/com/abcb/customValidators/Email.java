@@ -10,8 +10,6 @@ import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
-import org.hibernate.validator.internal.constraintvalidators.bv.EmailValidator;
-
 @Documented
 @Retention(RUNTIME)
 @Target(FIELD)
@@ -19,8 +17,8 @@ import org.hibernate.validator.internal.constraintvalidators.bv.EmailValidator;
 
 public @interface Email {
 	String message() default "{mail.invalidEmail}";
-	
-	Class<?>[] groups() default { };
 
-	Class<? extends Payload>[] payload() default { };
+	Class<?>[] groups() default {};
+
+	Class<? extends Payload>[] payload() default {};
 }

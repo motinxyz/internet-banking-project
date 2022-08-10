@@ -1,9 +1,7 @@
-package EmailValidator;
+package com.abcb.customValidators;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
-
-import com.abcb.customValidators.Email;
 
 public class EmailValidator implements ConstraintValidator<Email, String> {
 

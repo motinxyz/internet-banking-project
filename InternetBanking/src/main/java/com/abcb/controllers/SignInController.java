@@ -1,5 +1,7 @@
 package com.abcb.controllers;
 
+import javax.validation.Valid;
+
 import org.jboss.logging.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -23,7 +25,7 @@ public class SignInController {
 	}
 
 	@RequestMapping("authenticate")
-	String authenticate(@ModelAttribute("signInDTO") SignInDTO signInDTO, BindingResult result) {
+	String authenticate(@Valid @ModelAttribute("signInDTO") SignInDTO signInDTO, BindingResult result) {
 
 		logger.info(result.hasErrors());
 		if (result.hasErrors()) {

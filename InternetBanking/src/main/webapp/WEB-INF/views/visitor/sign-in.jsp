@@ -29,7 +29,7 @@
 
 		<div
 			class="row col-lg-5 align-items-center justify-content-center align-middle"
-			style="padding-top: 40px; padding-bottom: 50px;">
+			style="padding-top: 40px; padding-bottom: 30px;">
 
 			<!-- 			<div class="col-lg-7"> -->
 
@@ -62,7 +62,7 @@
 							Terms &amp; Conditions</label>
 					</div> -->
 
-					<div class="col-12 " style="margin-top: 30px;">
+					<div class="col-12 " style="margin-top: 20px;">
 						<button type="submit" class="btn btn-dark">Sign in</button>
 					</div>
 				</form:form>
