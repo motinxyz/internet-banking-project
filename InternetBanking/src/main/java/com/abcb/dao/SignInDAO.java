@@ -9,4 +9,6 @@ public interface SignInDAO {
 	boolean authenticate(SignInDTO studentDTO);
 
 	void setSession(int user_id, HttpSession session);
+	
+	void logSignOut(HttpSession session);
 }

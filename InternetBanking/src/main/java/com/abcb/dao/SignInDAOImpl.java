@@ -57,18 +57,6 @@ public class SignInDAOImpl implements SignInDAO {
 		return false;
 	}
 
-	private void logSignIn(int user_id) {
-		String sql = "INSERT INTO internet_banking.activity_logs (user_id, activity_type, activity_status) VALUES (?, 'sign-in', 'successful')";
-
-		int rowUpdated = jdbcTemplate.update(sql, user_id);
-
-		if (rowUpdated == 1) {
-			logger.info("SignIn activity has been recorded.");
-		} else {
-			logger.info("SignIn activity rocording failed for user " + user_id);
-		}
-	}
-
 	@Override
 	public void setSession(int user_id, HttpSession session) {
 
@@ -83,6 +71,30 @@ public class SignInDAOImpl implements SignInDAO {
 		session.setAttribute("phone_number", sessionInfo.getPhone_number());
 		session.setAttribute("permission_type", sessionInfo.getPermission_type());
 		session.setAttribute("frozen", sessionInfo.getFrozen());
+	}
+
+	private void logSignIn(int user_id) {
+		Object[] args = { user_id, "sign-in", "successful" };
+		logActivity(args);
+	}
+
+	@Override
+	public void logSignOut(HttpSession session) {
+
+		Object[] args = { (int) session.getAttribute("user_id"), "sign-out", "successful" };
+		logActivity(args);
+	}
+
+	public void logActivity(Object[] args) {
+		String sql = "INSERT INTO internet_banking.activity_logs (user_id, activity_type, activity_status) VALUES (?, ?, ?)";
+
+		int rowUpdated = jdbcTemplate.update(sql, args);
+
+		if (rowUpdated == 1) {
+			logger.info(args[1] + " activity has been recorded.");
+		} else {
+			logger.info(args[1] + " activity rocording failed for user " + args[0]);
+		}
 	}
 
 }

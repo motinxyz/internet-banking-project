@@ -2,7 +2,6 @@ package com.abcb.controllers;
 
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -87,6 +86,8 @@ public class SignInOutController {
 	@RequestMapping("sign-out")
 	void signOut(HttpSession session, HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+
+		signInDAO.logSignOut(session);
 		session.invalidate();
 //		return "visitor/visitor-home";
 //		RequestDispatcher rd = request.getRequestDispatcher("/");
