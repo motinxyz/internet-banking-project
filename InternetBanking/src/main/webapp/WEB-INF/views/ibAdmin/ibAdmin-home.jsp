@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@include file="visitor-header.jsp"%>
+	pageEncoding="UTF-8" isELIgnored="false"%>
+<%@include file="ibAdmin-header.jsp"%>
 
 <!DOCTYPE html>
 <html>
@@ -10,6 +10,8 @@
 <title>ABCB</title>
 </head>
 
-<body>Home
+<body>${permission_type}
+	<br /> ${name}
+
 </body>
 </html>

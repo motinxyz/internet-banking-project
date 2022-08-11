@@ -1,10 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" isELIgnored="false"%>
+
 <%@include file="visitor-header.jsp"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
-<!DOCTYPE html>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%><!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -56,6 +55,8 @@
 						<form:errors path="password" class="text-danger" />
 					</div>
 
+					<form:hidden path="user_id" />
+
 					<!-- 					<div class="form-check form-switch">
 						<input class="form-check-input" type="checkbox" id="agreed" /> <label
 							class="form-check-label" for="agreed">I Agree to the
@@ -67,7 +68,14 @@
 					</div>
 				</form:form>
 
+
 				<div style="margin-top: 20px; text-decoration: none;">
+
+					<c:if test="${validUser == false}">
+						<p class="text-danger" style="margin-bottom: 10px;">Invalid
+							Email/Password</p>
+					</c:if>
+
 					<a href="#" class="link-danger fw-bolder"
 						style="text-decoration: none;">Forgot Password?</a>
 
