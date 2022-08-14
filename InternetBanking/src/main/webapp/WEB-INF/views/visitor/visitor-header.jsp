@@ -27,7 +27,7 @@
 					aria-current="page" href="<%=request.getContextPath()%>/">Home</a></li>
 				<li class="nav-item"><a class="nav-link"
 					href="ibanking-request">iBanking Request</a></li>
-				<li class="nav-item"><a class="nav-link" href="#">Contact
+				<li class="nav-item"><a class="nav-link" href="contact-us">Contact
 						Us</a>
 			</ul>
 

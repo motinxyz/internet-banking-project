@@ -12,10 +12,18 @@ public class IbAdminController {
 	@RequestMapping("/")
 	String getHome(HttpSession session) {
 
-		if (session.getAttribute("permission_type").toString().equals("ibAdmin")) {
+		Object permissionType = session.getAttribute("permission_type");
+
+		if (permissionType == null) {
+			return "visitor/page-not-found";
+		}
+
+		else if (permissionType.toString().equals("ibAdmin")) {
 			return "ibAdmin/ibAdmin-home";
-		} else {
-			return "page-not-found";
+		}
+
+		else {
+			return permissionType + "/page-not-found";
 		}
 
 	}

@@ -7,9 +7,13 @@ import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.abcb.customPropertyEditors.CustomStringPropertyEditor;
+import com.abcb.customPropertyEditors.PhonePropertyEditor;
 import com.abcb.dto.IBankingRequestDTO;
 import com.abcb.util.PermissionTypeFinder;
 
@@ -22,18 +26,20 @@ public class VisitorController {
 	PermissionTypeFinder permissionTypeFinder;
 
 	Logger logger = Logger.getLogger(getClass().getName());
-	
+
 	@RequestMapping("/")
 	String getHomepage(HttpSession session) {
 
 //		String permissionType = permissionTypeFinder.getPermissionType(session);
+		Object permissionType = session.getAttribute("permission_type");
+		logger.info("HomeController -> getHomepage -> Permission Type: " + permissionType);
 
 		if (session.getAttribute("permission_type") == null) {
 			return groupURL + "visitor-home";
 		}
 
 		else {
-			String permissionType = session.getAttribute("permission_type").toString();
+
 			return permissionType + "/" + permissionType + "-home";
 		}
 	}
@@ -60,22 +66,67 @@ public class VisitorController {
 			BindingResult result, HttpSession session) {
 
 //		String permissionType = permissionTypeFinder.getPermissionType(session);
-
-		
-		if(result.hasErrors()) {
-			logger.info("iBanking Request Form has invalid infos");
-			
-//			return
-		}
-		
 		if (session.getAttribute("permission_type") == null) {
-			return groupURL + "ibanking-request";
+
+			if (result.hasErrors()) {
+
+				logger.info("iBanking Request Form has invalid infos");
+				return groupURL + "/ibanking-request";
+
+			} else {
+				return "";
+			}
 		}
 
 		else {
-			String permissionType = session.getAttribute("permission_type").toString();
+			Object permissionType = session.getAttribute("permission_type");
 			return permissionType + "/page-not-found";
 		}
 
+	}
+
+	@RequestMapping("page-not-found")
+	String getPageNotFoundPage(HttpSession session) {
+		Object permissionType = session.getAttribute("permission_type");
+
+		if (permissionType != null) {
+			return permissionType + "/page-not-found";
+		}
+
+		else {
+			return groupURL + "/page-not-found";
+		}
+	}
+
+	@RequestMapping("contact-us")
+	String getContactUsPage(HttpSession session) {
+
+		Object permissionType = session.getAttribute("permission_type");
+
+		if (permissionType == null) {
+			return groupURL + "/contact-us";
+		} else {
+			return permissionType + "/contact-us";
+		}
+	}
+
+	@InitBinder
+	private void initBinder(WebDataBinder binder) {
+		CustomStringPropertyEditor editor = new CustomStringPropertyEditor();
+
+//		Removing all the white spaces
+		binder.registerCustomEditor(String.class, "email", editor);
+		binder.registerCustomEditor(String.class, "phone_number", editor);
+		binder.registerCustomEditor(String.class, "password", editor);
+		binder.registerCustomEditor(String.class, "name", editor);
+		binder.registerCustomEditor(String.class, "father_name", editor);
+		binder.registerCustomEditor(String.class, "mother_name", editor);
+		binder.registerCustomEditor(String.class, "address", editor);
+		binder.registerCustomEditor(String.class, "account_number", editor);
+
+		PhonePropertyEditor phoneEditor = new PhonePropertyEditor();
+
+//		Removing country code
+		binder.registerCustomEditor(String.class, "phone_number", phoneEditor);
 	}
 }

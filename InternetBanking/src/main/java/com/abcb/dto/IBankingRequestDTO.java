@@ -1,5 +1,6 @@
 package com.abcb.dto;
 
+import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.Size;
 
 import com.abcb.customValidators.Email;
@@ -30,7 +31,18 @@ public class IBankingRequestDTO {
 
 	@Size(min = 8, message = "{password.invalidLength}")
 	private String password;
-	
+
+	@AssertTrue(message = "{termsAndConditions.notChecked}")
+	private boolean termsAndConditionsChecked;
+
+	public boolean isTermsAndConditionsChecked() {
+		return termsAndConditionsChecked;
+	}
+
+	public void setTermsAndConditionsChecked(boolean termsAndConditionsChecked) {
+		this.termsAndConditionsChecked = termsAndConditionsChecked;
+	}
+
 	public String getName() {
 		return name;
 	}

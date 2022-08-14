@@ -38,14 +38,14 @@ public class SignInOutController {
 	String signInPage(@ModelAttribute("signInDTO") SignInDTO signInDTO, HttpSession session,
 			HttpServletResponse response, HttpServletRequest request) throws IOException {
 
-		String permissionType = permissionTypeFinder.getPermissionType(session);
-		logger.info("Permission Type: " + permissionType);
+		Object permissionType = session.getAttribute("permission_type");
+		logger.info("SignInController-> SignIn -> Permission Type: " + permissionType);
 
 		if (permissionType == null) {
 			return groupURL + "sign-in";
 		} else {
 
-			return permissionType + "/" + permissionType + "-home";
+			return permissionType + "/page-not-found";
 		}
 	}
 
@@ -54,32 +54,44 @@ public class SignInOutController {
 			HttpSession session, HttpServletResponse response, HttpServletRequest request)
 			throws IOException, ServletException {
 
-		logger.info("binding result has error: " + result.hasErrors());
-		if (result.hasErrors()) {
-			return groupURL + "sign-in";
-		}
+		Object permissionType = session.getAttribute("permission_type");
+		logger.info("SignInController -> Authenticate -> Permission Type: " + permissionType);
 
-		boolean authenticated = signInDAO.authenticate(signInDTO);
+		if (permissionType == null) {
 
-		if (authenticated) {
-
-			signInDAO.setSession(signInDTO.getUser_id(), session);
-
-			if (session.getAttribute("permission_type") != null) {
-				logger.info("Session set successful");
-			} else {
-				logger.info("Session set successful");
+			if (result.hasErrors()) {
+				logger.info("binding result has error: " + result.hasErrors());
+				return groupURL + "sign-in";
 			}
 
-			String permissionType = session.getAttribute("permission_type").toString();
-			return permissionType + "/" + permissionType + "-home";
+			boolean authenticated = signInDAO.authenticate(signInDTO);
+
+			if (authenticated) {
+
+				signInDAO.setSession(signInDTO.getUser_id(), session);
+
+				if (session.getAttribute("permission_type") == null) {
+					logger.info("Session set failed");
+				} else {
+					logger.info("Session set successful");
+				}
+
+//				permissionType = session.getAttribute("permission_type").toString();
+
+				permissionType = session.getAttribute("permission_type");
+				return permissionType + "/" + permissionType + "-home";
 
 //			logger.info("Request Forward to home was unsuccessful");
-		}
+			}
 
-		else {
-			request.setAttribute("validUser", "false");
-			return groupURL + "sign-in";
+			else {
+				request.setAttribute("validUser", "false");
+				return groupURL + "sign-in";
+			}
+
+		} else {
+
+			return permissionType + "/page-not-found";
 		}
 	}
 
@@ -87,12 +99,18 @@ public class SignInOutController {
 	void signOut(HttpSession session, HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		signInDAO.logSignOut(session);
-		session.invalidate();
+		Object permissionType = session.getAttribute("permission_type");
+
+		if (permissionType == null) {
+			response.sendRedirect("page-not-found");
+		} else {
+			signInDAO.logSignOut(session);
+			session.invalidate();
 //		return "visitor/visitor-home";
 //		RequestDispatcher rd = request.getRequestDispatcher("/");
 //		rd.forward(request, response);
-		response.sendRedirect("/InternetBanking/");
+			response.sendRedirect("/InternetBanking/");
+		}
 	}
 
 	@InitBinder
