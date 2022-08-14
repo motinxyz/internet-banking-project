@@ -1,60 +1,119 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" isELIgnored="false"%>
+
+<%@include file="visitor-header.jsp"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
+
 <html>
 <head>
 <meta charset="UTF-8">
 <title>iBanking Request</title>
+
+<style type="text/css">
+.container {
+	background: white;
+	box-shadow: 15px 15px 20px;
+	border-radius: 15px;
+	box-shadow: 15px 15px 30px;
+	margin-top: 50px;
+	padding-bottom: 50px;
+}
+</style>
+
 </head>
 <body>
-	<section class="ibankingRequestForm" style="padding-top: 50px;">
-		<div class="container">
+	<section
+		class="container col-lg-8  d-flex align-items-center justify-content-center align-middle"
+		style="padding-top: 80px;">
 
-			<form class="row g-3">
-				<div class="col-md-6">
-					<label for="inputEmail4" class="form-label">Email</label> <input
-						type="email" class="form-control" id="inputEmail4">
+		<div align="center">
+
+			<form:form action="submit-ibanking-request" method="post"
+				modelAttribute="iBankingRequestDTO" class="row g-4 col-lg-9">
+
+				<div class="col-md-6" align="left">
+
+					<form:input type="text" path="name" class="form-control"
+						placeholder="Your Name:" />
+
+					<form:errors path="name" class="text-danger" />
 				</div>
-				<div class="col-md-6">
-					<label for="inputPassword4" class="form-label">Password</label> <input
-						type="password" class="form-control" id="inputPassword4">
+
+				<div class="col-md-6" align="left">
+
+					<form:input type="text" path="account_number" class="form-control"
+						placeholder="Account Number:" />
+
+					<form:errors path="account_number" class="text-danger" />
 				</div>
+
+				<div class="col-md-6" align="left">
+
+					<form:input type="text" path="father_name" class="form-control"
+						placeholder="Father's Name:" />
+
+					<form:errors path="father_name" class="text-danger" />
+				</div>
+
+
+				<div class="col-md-6" align="left">
+
+					<form:input type="text" path="mother_name" class="form-control"
+						placeholder="Mother's Name:" />
+
+					<form:errors path="mother_name" class="text-danger" />
+				</div>
+
+				<div class="col-md-12" align="left">
+
+					<form:input type="text" path="address" class="form-control"
+						placeholder="Address:" />
+
+					<form:errors path="address" class="text-danger" />
+				</div>
+
+				<div class="col-md-6" align="left">
+
+					<form:input type="email" path="email" class="form-control"
+						placeholder="Registered Email:" />
+
+					<form:errors path="email" class="text-danger" />
+				</div>
+
+				<div class="col-md-6" align="left">
+
+					<form:input type="text" path="phone_number" class="form-control"
+						placeholder="Registered Phone Number:" />
+
+					<form:errors path="phone_number" class="text-danger" />
+				</div>
+
+
+				<div class="col-md-12" align="left">
+
+					<form:input type="password" path="password" class="form-control"
+						placeholder="Password:" />
+
+					<form:errors path="password" class="text-danger" />
+				</div>
+
+
+
+
+
+				<div class="form-check form-switch">
+					<input class="form-check-input" type="checkbox" id="agreed" /> <label
+						class="form-check-label" for="agreed">I Agree to the Terms
+						&amp; Conditions</label>
+				</div>
+
 				<div class="col-12">
-					<label for="inputAddress" sclass="form-label">Address</label> <input
-						type="text" class="form-control" id="inputAddress"
-						placeholder="1234 Main St">
+					<button type="submit" class="btn btn-dark">Submit Request</button>
 				</div>
-				<div class="col-12">
-					<label for="inputAddress2" class="form-label">Address 2</label> <input
-						type="text" class="form-control" id="inputAddress2"
-						placeholder="Apartment, studio, or floor">
-				</div>
-				<div class="col-md-6">
-					<label for="inputCity" class="form-label">City</label> <input
-						type="text" class="form-control" id="inputCity">
-				</div>
-				<div class="col-md-4">
-					<label for="inputState" class="form-label">State</label> <select
-						id="inputState" class="form-select">
-						<option selected>Choose...</option>
-						<option>...</option>
-					</select>
-				</div>
-				<div class="col-md-2">
-					<label for="inputZip" class="form-label">Zip</label> <input
-						type="text" class="form-control" id="inputZip">
-				</div>
-				<div class="col-12">
-					<div class="form-check">
-						<input class="form-check-input" type="checkbox" id="gridCheck">
-						<label class="form-check-label" for="gridCheck"> Check me
-							out </label>
-					</div>
-				</div>
-				<div class="col-12">
-					<button type="submit" class="btn btn-primary">Sign in</button>
-				</div>
-			</form>
+			</form:form>
 
 		</div>
 	</section>
