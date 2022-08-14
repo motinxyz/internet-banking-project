@@ -33,7 +33,7 @@
 </style>
 
 </head>
-<body>
+<body style="margin-top: 90px;">
 	<section
 		class="container col-lg-7  d-flex align-items-center justify-content-center"
 		style="padding-top: 40px;">
@@ -128,9 +128,66 @@
 					<form:errors path="termsAndConditionsChecked" class="text-danger" />
 				</div>
 
+
+				<!-- Condition Checks -->
+
+
+				<c:if test="${physicalBankAccountExists == false}">
+
+					<div>
+						<div class="text-danger" style="margin-bottom: 10px;">Sorry!
+							You must have an account with us to request for iBanking
+							activation!</div>
+
+					</div>
+				</c:if>
+
+				<c:if test="${iBankingAccountAlreadyExists == true}">
+
+					<div>
+						<div class="text-danger" style="margin-bottom: 10px;">You
+							already have access to Internet Banking!</div>
+
+						<div>
+							<a class="link-dark fw-semibold" href="sign-in">Sign In?</a>
+						</div>
+
+					</div>
+				</c:if>
+
+
+				<c:if test="${userAccountFrozen == true}">
+
+					<div>
+						<div class="text-danger" style="margin-bottom: 10px;">Sorry
+							you cannot request for iBanking as your account is frozen.</div>
+
+						<div class="text-danger" style="margin-bottom: 10px;">
+							Please Contact <a class="link-danger" href="contact-us">Support!</a>
+						</div>
+
+					</div>
+				</c:if>
+
+
+				<c:if test="${userInformationsAreValid == false}">
+
+					<div>
+						<div class="text-danger" style="margin-bottom: 10px;">Sorry
+							informations that you have entered are not valid!</div>
+
+						<div class="text-danger" style="margin-bottom: 10px;">
+							Please try Again!</div>
+
+					</div>
+				</c:if>
+
+
 				<div class="col-12">
 					<button type="submit" class="btn btn-dark">Submit Request</button>
 				</div>
+
+
 
 			</form:form>
 		</div>

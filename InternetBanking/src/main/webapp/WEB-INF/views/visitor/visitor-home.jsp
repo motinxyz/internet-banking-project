@@ -10,6 +10,10 @@
 <title>ABCB</title>
 </head>
 
-<body>Home
+<body style="margin-top: 80px;">
+	Home
+
+<!-- 	<img alt="" src="/InternetBanking/resources/images/ABCB-logos.jpeg"
+		width="200px"> -->
 </body>
 </html>

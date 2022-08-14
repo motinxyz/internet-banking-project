@@ -10,7 +10,7 @@
 <title>Page Not Found!</title>
 </head>
 
-<body>
+<body style="margin-top: 80px;">
 
 	<div class="container text-center" style="margin-top: 100px;">
 

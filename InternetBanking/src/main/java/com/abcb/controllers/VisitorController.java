@@ -1,5 +1,6 @@
 package com.abcb.controllers;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.abcb.customPropertyEditors.CustomStringPropertyEditor;
 import com.abcb.customPropertyEditors.PhonePropertyEditor;
+import com.abcb.dao.IBankingRequestDAOImpl;
 import com.abcb.dto.IBankingRequestDTO;
 import com.abcb.util.PermissionTypeFinder;
 
@@ -26,6 +28,9 @@ public class VisitorController {
 	PermissionTypeFinder permissionTypeFinder;
 
 	Logger logger = Logger.getLogger(getClass().getName());
+
+	@Autowired
+	IBankingRequestDAOImpl iBankingRequestDAO;
 
 	@RequestMapping("/")
 	String getHomepage(HttpSession session) {
@@ -63,7 +68,7 @@ public class VisitorController {
 
 	@RequestMapping("submit-ibanking-request")
 	String submitiBankingRequest(@Valid @ModelAttribute("iBankingRequestDTO") IBankingRequestDTO iBankingRequestDTO,
-			BindingResult result, HttpSession session) {
+			BindingResult result, HttpSession session, HttpServletRequest request) {
 
 //		String permissionType = permissionTypeFinder.getPermissionType(session);
 		if (session.getAttribute("permission_type") == null) {
@@ -74,7 +79,9 @@ public class VisitorController {
 				return groupURL + "/ibanking-request";
 
 			} else {
-				return "";
+
+				return registrationErrorCheck(iBankingRequestDTO, request);
+
 			}
 		}
 
@@ -83,6 +90,54 @@ public class VisitorController {
 			return permissionType + "/page-not-found";
 		}
 
+	}
+
+	String registrationErrorCheck(IBankingRequestDTO iBankingRequestDTO, HttpServletRequest request) {
+
+		boolean physicalBankAccountExists = iBankingRequestDAO
+				.checkIfphysicalAccountExists(iBankingRequestDTO.getAccount_number());
+		if (!physicalBankAccountExists) {
+
+//			Physical Bank Account doesn't Exist
+			request.setAttribute("physicalBankAccountExists", false);
+			return groupURL + "/ibanking-request";
+		} else {
+
+//			Physical Bank account exists
+			boolean iBankingAccountAlreadyExists = iBankingRequestDAO
+					.checkIfIBankingAccountAlreadyExists(iBankingRequestDTO.getAccount_number());
+
+			if (iBankingAccountAlreadyExists) {
+
+				request.setAttribute("iBankingAccountAlreadyExists", true);
+				return groupURL + "/ibanking-request";
+			} else {
+
+//			Internet Banking Account Doesn't Exists
+				boolean isUserAccountFrozen = iBankingRequestDAO.isUserAccountFrozen(iBankingRequestDTO);
+				if (isUserAccountFrozen) {
+
+					request.setAttribute("userAccountFrozen", true);
+					return groupURL + "/ibanking-request";
+				} else {
+
+//				"User Account is not Frozen!"
+					boolean enteredValidInformations = iBankingRequestDAO
+							.areEnteredInformationsValid(iBankingRequestDTO);
+					if (enteredValidInformations) {
+//				
+						return "";
+					} else {
+
+//					user informations are invalid
+						request.setAttribute("userInformationsAreValid", false);
+						return groupURL + "/ibanking-request";
+					}
+				}
+			}
+		}
+
+//	else if()
 	}
 
 	@RequestMapping("page-not-found")
