@@ -43,6 +43,8 @@
 			<form:form action="submit-ibanking-request" method="post"
 				modelAttribute="iBankingRequestDTO" class="row g-4 col-lg-9">
 
+				<form:hidden path="user_id" />
+
 				<div>
 					<h2 class="fs-2">iBanking Request Form</h2>
 				</div>
@@ -88,6 +90,26 @@
 					<form:errors path="address" class="text-danger" />
 				</div>
 
+				<%-- 			<div class="col-md-6" align="left">
+
+										<form:input type="date" class="input-group date"
+						path="date_of_birth" class="form-control"
+						placeholder="Date of birth:" />
+
+					<div class="input-group date" id="datepicker">
+						<input type="text" class="form-control" id="date" /> <span
+							class="input-group-append"> <span
+							class="input-group-text bg-light d-block"> <i
+								class="fa fa-calendar"></i>
+						</span>
+						</span>
+					</div>
+
+					<form:errors path="date_of_birth" class="text-danger" />
+				</div> --%>
+
+
+
 				<div class="col-md-6" align="left">
 
 					<form:input type="email" path="email" class="form-control"
@@ -95,6 +117,7 @@
 
 					<form:errors path="email" class="text-danger" />
 				</div>
+
 
 				<div class="col-md-6" align="left">
 
@@ -136,8 +159,8 @@
 
 					<div>
 						<div class="text-danger" style="margin-bottom: 10px;">Sorry!
-							You must have an account with us to request for iBanking
-							activation!</div>
+							You must need to have an account in our bank to request for
+							iBanking activation!</div>
 
 					</div>
 				</c:if>
@@ -169,6 +192,18 @@
 					</div>
 				</c:if>
 
+
+				<c:if test="${alreadyRequested == true}">
+
+					<div>
+						<div class="text-danger" style="margin-bottom: 10px;">You
+							have Already requested for iBanking activation!</div>
+
+						<div class="text-danger" style="margin-bottom: 10px;">
+							Please wait, our customer care agent will contact you!</div>
+
+					</div>
+				</c:if>
 
 				<c:if test="${userInformationsAreValid == false}">
 

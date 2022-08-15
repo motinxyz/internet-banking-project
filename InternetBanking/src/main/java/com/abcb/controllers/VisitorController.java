@@ -101,41 +101,67 @@ public class VisitorController {
 //			Physical Bank Account doesn't Exist
 			request.setAttribute("physicalBankAccountExists", false);
 			return groupURL + "/ibanking-request";
-		} else {
+		}
+//		else {
 
 //			Physical Bank account exists
-			boolean iBankingAccountAlreadyExists = iBankingRequestDAO
-					.checkIfIBankingAccountAlreadyExists(iBankingRequestDTO.getAccount_number());
+		boolean iBankingAccountAlreadyExists = iBankingRequestDAO
+				.checkIfIBankingAccountAlreadyExists(iBankingRequestDTO.getAccount_number());
 
-			if (iBankingAccountAlreadyExists) {
+		if (iBankingAccountAlreadyExists) {
 
-				request.setAttribute("iBankingAccountAlreadyExists", true);
+			request.setAttribute("iBankingAccountAlreadyExists", true);
+			return groupURL + "/ibanking-request";
+		}
+//			else {
+
+//		If Internet Banking Account Doesn't Exists ->
+		boolean isUserAccountFrozen = iBankingRequestDAO.isUserAccountFrozen(iBankingRequestDTO);
+		if (isUserAccountFrozen) {
+
+			request.setAttribute("userAccountFrozen", true);
+			return groupURL + "/ibanking-request";
+		}
+//				else {
+
+//		If User Account is not Frozen ->
+		boolean enteredValidInformations = iBankingRequestDAO.areEnteredInformationsValid(iBankingRequestDTO);
+		if (enteredValidInformations) {
+
+			boolean alreadyRequested = iBankingRequestDAO.requestAlreadyPending(iBankingRequestDTO.getAccount_number());
+			if (alreadyRequested) {
+
+//				Already placed a request for iBanking activation
+				request.setAttribute("alreadyRequested", true);
 				return groupURL + "/ibanking-request";
-			} else {
+			}
+//					else {
 
-//			Internet Banking Account Doesn't Exists
-				boolean isUserAccountFrozen = iBankingRequestDAO.isUserAccountFrozen(iBankingRequestDTO);
-				if (isUserAccountFrozen) {
+//			There is no pending request, so forward the request
+			boolean dataUpdatedToTheIBankingRequestList = iBankingRequestDAO.entryIBankingRequest(iBankingRequestDTO);
+			if (dataUpdatedToTheIBankingRequestList) {
 
-					request.setAttribute("userAccountFrozen", true);
-					return groupURL + "/ibanking-request";
-				} else {
+//								
+//								forward this to OTP verification module
+//								
+				return groupURL + "/ibanking-request-received";
+			}
 
-//				"User Account is not Frozen!"
-					boolean enteredValidInformations = iBankingRequestDAO
-							.areEnteredInformationsValid(iBankingRequestDTO);
-					if (enteredValidInformations) {
-//				
-						return "";
-					} else {
+//							
+//							forward this to exception handler
+//							
+			return "";
+//					}
+
+		} else {
 
 //					user informations are invalid
-						request.setAttribute("userInformationsAreValid", false);
-						return groupURL + "/ibanking-request";
-					}
-				}
-			}
+			request.setAttribute("userInformationsAreValid", false);
+			return groupURL + "/ibanking-request";
 		}
+//			}
+//		}
+//		}
 
 //	else if()
 	}

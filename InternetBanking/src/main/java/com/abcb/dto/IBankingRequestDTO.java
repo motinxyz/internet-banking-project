@@ -8,6 +8,8 @@ import com.abcb.customValidators.Phone;
 
 public class IBankingRequestDTO {
 
+	private int user_id = 0;
+
 	@Size(min = 4, max = 100, message = "{name.invalidLength}")
 	private String name;
 
@@ -23,6 +25,8 @@ public class IBankingRequestDTO {
 	@Size(min = 8, max = 8, message = "{account_number.invalidLength}")
 	private String account_number;
 
+//	private String date_of_birth;
+
 	@Email
 	private String email;
 
@@ -35,8 +39,24 @@ public class IBankingRequestDTO {
 	@AssertTrue(message = "{termsAndConditions.notChecked}")
 	private boolean termsAndConditionsChecked;
 
+//	public String getDate_of_birth() {
+//		return date_of_birth;
+//	}
+//
+//	public void setDate_of_birth(String date_of_birth) {
+//		this.date_of_birth = date_of_birth;
+//	}
+
 	public boolean isTermsAndConditionsChecked() {
 		return termsAndConditionsChecked;
+	}
+
+	public int getUser_id() {
+		return user_id;
+	}
+
+	public void setUser_id(int user_id) {
+		this.user_id = user_id;
 	}
 
 	public void setTermsAndConditionsChecked(boolean termsAndConditionsChecked) {
@@ -106,5 +126,10 @@ public class IBankingRequestDTO {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
+//	@Override
+//	public String toString() {
+//		return account_number;
+//	}
 
 }
