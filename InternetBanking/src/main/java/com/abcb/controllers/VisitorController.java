@@ -56,7 +56,7 @@ public class VisitorController {
 //		String permissionType = permissionTypeFinder.getPermissionType(session);
 
 		if (session.getAttribute("permission_type") == null) {
-			return groupURL + "ibanking-request";
+			return groupURL + "/ibanking-request";
 		}
 
 		else {

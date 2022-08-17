@@ -8,7 +8,9 @@ public interface SignInDAO {
 	
 	boolean authenticate(SignInDTO studentDTO);
 
-	void setSession(int user_id, HttpSession session);
+	boolean setSession(int user_id, HttpSession session);
 	
 	void logSignOut(HttpSession session);
+	
+//	boolean isAccountFrozen(String user_id);
 }

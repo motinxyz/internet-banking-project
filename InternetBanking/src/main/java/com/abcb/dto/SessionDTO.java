@@ -1,8 +1,39 @@
 package com.abcb.dto;
 
 public class SessionDTO {
-	private String name, phone_number, email, permission_type, frozen;
+	private String name, father_name, mother_name, date_of_birth, address, phone_number, email, permission_type, frozen;
 
+	public String getDate_of_birth() {
+		return date_of_birth;
+	}
+
+	public void setDate_of_birth(String date_of_birth) {
+		this.date_of_birth = date_of_birth;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getFather_name() {
+		return father_name;
+	}
+
+	public void setFather_name(String father_name) {
+		this.father_name = father_name;
+	}
+
+	public String getMother_name() {
+		return mother_name;
+	}
+
+	public void setMother_name(String mother_name) {
+		this.mother_name = mother_name;
+	}
 
 	public String getName() {
 		return name;

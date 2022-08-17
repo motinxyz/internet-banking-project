@@ -26,6 +26,7 @@ public class PendingRequestsRSE implements ResultSetExtractor<List<IBankingReque
 			request.setFather_name(rs.getString("father_name"));
 			request.setMother_name(rs.getString("mother_name"));
 			request.setAddress(rs.getString("address"));
+			request.setPassword(rs.getString("password"));
 			request.setPhone_number(rs.getString("phone_number"));
 
 			requestsList.add(request);

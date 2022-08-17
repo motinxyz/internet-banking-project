@@ -17,7 +17,10 @@ package com.abcb.pe;
  * limitations under the License.
  */
 
-/*
+/* 
+ * Remarks: 
+ * Md Abdul Motin
+ * 
  * I have taken this code from Spring Security code base 
  * to encode password without using the whole module.
  * 
@@ -26,12 +29,12 @@ package com.abcb.pe;
  * Organization: Pivotal Software
  * Code Base: https://github.com/spring-projects/spring-security
  * 
- * */
-
-/* Modifications I have made over the original code: 
+ *
+ *
+ * Modifications I have made over the original code: 
  * 
- * 1. Changed the logger from the apache commons to Java util type
- * 2. As a result, I had to change two logging method, from warn to info
+ * 1. Used Java utility logger instead of Apache commons
+ * 2. So I had to change the warnings to info
  * 
  * 3. Commented the implementation of the upgradeEncoding() method
  * 		to reduce the size of the compiled class file as I will not use
@@ -39,7 +42,7 @@ package com.abcb.pe;
  * 
  * 
  * I have kept all the original code that I have changed or omitted
- * as comments to keep the integrity of the original file
+ * as comments to keep the integrity of the original code
  * 	
  * 
  * Possible Security Threats:

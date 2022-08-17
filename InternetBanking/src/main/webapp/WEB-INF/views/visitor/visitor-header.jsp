@@ -12,7 +12,7 @@
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
 	<div class="container-fluid">
-		<a class="navbar-brand" href="<%=request.getContextPath()%>/"> <i
+		<a class="navbar-brand" href="/InternetBanking/"> <i
 			class="bi bi-bank"> | ABCB</i>
 		</a>
 		<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -24,9 +24,9 @@
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 				<li class="nav-item"><a class="nav-link active"
-					aria-current="page" href="<%=request.getContextPath()%>/">Home</a></li>
+					aria-current="page" href="/InternetBanking/">Home</a></li>
 				<li class="nav-item"><a class="nav-link"
-					href="ibanking-request">iBanking Request</a></li>
+					href="/InternetBanking/ibanking-request">iBanking Request</a></li>
 				<li class="nav-item"><a class="nav-link" href="contact-us">Contact
 						Us</a>
 			</ul>

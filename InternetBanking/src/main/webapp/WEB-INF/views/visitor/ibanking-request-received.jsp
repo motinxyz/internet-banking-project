@@ -23,6 +23,14 @@
 	padding-bottom: 50px;
 }
 
+.goBackIcon {
+	font-size: 1.8rem;
+}
+
+.goBackIcon:hover {
+	cursor: pointer;
+}
+
 body {
 	margin-top: 120px;
 }
@@ -38,14 +46,19 @@ body {
 
 		<div class="fs-5">Your request has been placed successfully.</div>
 
-		<div class="fs-5">Please wait, our agent will contact you soon!
-		</div>
+		<div class="fs-5">Please wait for our agent to contact you!</div>
 
 		<br />
 
-		<div class="col-lg-3">
+		<%-- 		<div class="col-lg-3">
 			<a href="<%=request.getContextPath()%>/">
 				<button type="button" class="btn btn-dark">Return Home</button>
+			</a>
+		</div> --%>
+
+		<div class="goBackIcon">
+			<a href="/InternetBanking/" class="text-decoration-none"> <i
+				class="bi bi-arrow-left-circle">Go Back</i>
 			</a>
 		</div>
 

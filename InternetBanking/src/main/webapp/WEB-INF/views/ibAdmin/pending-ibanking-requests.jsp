@@ -32,24 +32,24 @@
 			</thead>
 			<tbody>
 
+
+				<c:forEach var="request" items="${requestsList}">
+					<tr>
+
+						<td style="vertical-align: middle;">${request.user_id}</td>
+						<td style="vertical-align: middle;">${request.account_number}</td>
+						<td style="vertical-align: middle;">${request.name}</td>
+						<td style="vertical-align: middle;">${request.address}</td>
+						<td style="vertical-align: middle;">${request.phone_number}</td>
+
+
+						<td><a class="btn btn-dark btn-sm"
+							href="view-request-details/${request.account_number}">Details</a></td>
+
+					</tr>
+				</c:forEach>
+
 			</tbody>
-
-			<c:forEach var="request" items="${requestsList}">
-				<tr>
-
-					<td style="vertical-align: middle;">${request.user_id}</td>
-					<td style="vertical-align: middle;">${request.account_number}</td>
-					<td style="vertical-align: middle;">${request.name}</td>
-					<td style="vertical-align: middle;">${request.address}</td>
-					<td style="vertical-align: middle;">${request.phone_number}</td>
-
-
-					<td><a class="btn btn-dark btn-sm"
-						href="view-request-details/${request.account_number}">Details</a></td>
-
-				</tr>
-			</c:forEach>
-
 		</table>
 	</div>
 </body>

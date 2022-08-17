@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.abcb.dto.AccountInfoDTO;
 import com.abcb.dto.IBankingRequestDTO;
@@ -217,6 +218,69 @@ public class IBankingRequestDAOImpl implements IBankingRequestDAO {
 
 		logger.info("IBankingRequestDAO-> requestExists-> It's an invalid account number");
 		return false;
+	}
+
+	@Override
+	public IBankingRequestDTO rejectIBankingRequest(String account_number) {
+
+		String sql = "SELECT * FROM internet_banking.ibanking_requests WHERE account_number = ?";
+		List<IBankingRequestDTO> requestsList = jdbcTemplate.query(sql, new PendingRequestsRSE(), account_number);
+
+		sql = "DELETE FROM internet_banking.ibanking_requests WHERE account_number = ?";
+		int deletedRequest = jdbcTemplate.update(sql, account_number);
+
+		if (deletedRequest == 1) {
+			return requestsList.get(0);
+		}
+		return null;
+	}
+
+	@Override
+//	@Transactional
+	public IBankingRequestDTO acceptIBankingRequest(String account_number) {
+
+		logger.info("IBankingRequestDAO-> accept banking request ->");
+
+		String sql = "SELECT * FROM internet_banking.ibanking_requests WHERE account_number = ?";
+		List<IBankingRequestDTO> requestsList = jdbcTemplate.query(sql, new PendingRequestsRSE(), account_number);
+
+		sql = "DELETE FROM internet_banking.ibanking_requests WHERE account_number = ?";
+		int updateSuccessful = jdbcTemplate.update(sql, account_number);
+
+		IBankingRequestDTO user = requestsList.get(0);
+
+		if (updateSuccessful == 1) {
+
+			logger.info("  :Info has been deleted from ibanking request table");
+
+			sql = "UPDATE internet_banking.bank_accounts SET internet_banking_activated = 'yes' WHERE account_number = ?";
+			updateSuccessful = jdbcTemplate.update(sql, account_number);
+
+			if (updateSuccessful == 1) {
+
+				logger.info("  :internet_banking_activated updated to yes");
+
+				sql = "SELECT * FROM internet_banking.user_info WHERE user_id=?";
+				List<UserInfoDTO> userInfoList = jdbcTemplate.query(sql,
+						new BeanPropertyRowMapper<UserInfoDTO>(UserInfoDTO.class), user.getUser_id());
+
+				UserInfoDTO sign_in_info = userInfoList.get(0);
+
+				sql = "INSERT INTO internet_banking.sign_in_info (user_id, email, password) VALUES (?, ?, ?)";
+				Object[] args = { user.getUser_id(), sign_in_info.getEmail(), user.getPassword() };
+
+				updateSuccessful = jdbcTemplate.update(sql, args);
+
+				if (updateSuccessful == 1) {
+
+					logger.info("  :Sign in info updated to the table");
+					return user;
+				}
+			}
+		}
+
+		return null;
+
 	}
 
 }

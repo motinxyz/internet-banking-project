@@ -42,7 +42,7 @@
 
 					<div class="form-floating mb-3" align="left">
 						<form:input type="email" path="email" class="form-control"
-							id="email" placeholder="name@example.com" />
+							id="email" placeholder="name@example.com" required="true" />
 						<label for="email">Email:</label>
 
 						<form:errors path="email" class="text-danger" />
@@ -50,7 +50,7 @@
 
 					<div class="form-floating mb-3" align="left">
 						<form:input type="password" path="password" class="form-control"
-							id="password" placeholder="********" />
+							id="password" placeholder="********" required="true" />
 						<label for="password">Password:</label>
 
 						<form:errors path="password" class="text-danger" />
@@ -75,6 +75,11 @@
 					<c:if test="${validUser == false}">
 						<p class="text-danger" style="margin-bottom: 10px;">Invalid
 							Email/Password</p>
+					</c:if>
+
+					<c:if test="${account_frozen == true}">
+						<p class="text-danger" style="margin-bottom: 10px;">Please
+							contact customer care! Your account is frozen!</p>
 					</c:if>
 
 					<a href="#" class="link-danger fw-bolder"

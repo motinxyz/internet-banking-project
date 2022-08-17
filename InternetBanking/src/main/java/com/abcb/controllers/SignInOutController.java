@@ -68,7 +68,13 @@ public class SignInOutController {
 
 			if (authenticated) {
 
-				signInDAO.setSession(signInDTO.getUser_id(), session);
+				boolean account_frozen = signInDAO.setSession(signInDTO.getUser_id(), session);
+
+				if (account_frozen) {
+					request.setAttribute("account_frozen", account_frozen);
+
+					return groupURL + "sign-in";
+				}
 
 				if (session.getAttribute("permission_type") == null) {
 					logger.info("Session set failed");

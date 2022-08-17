@@ -52,7 +52,7 @@
 				<div class="col-md-6" align="left">
 
 					<form:input type="text" path="name" class="form-control"
-						placeholder="Your Name:" />
+						placeholder="Your Name:" required="true"/>
 
 					<form:errors path="name" class="text-danger" />
 				</div>
@@ -60,7 +60,7 @@
 				<div class="col-md-6" align="left">
 
 					<form:input type="number" path="account_number"
-						class="form-control" placeholder="Account Number:" />
+						class="form-control" placeholder="Account Number:" required="true" />
 
 					<form:errors path="account_number" class="text-danger" />
 				</div>
@@ -68,7 +68,7 @@
 				<div class="col-md-6" align="left">
 
 					<form:input type="text" path="father_name" class="form-control"
-						placeholder="Father's Name:" />
+						placeholder="Father's Name:" required="true" />
 
 					<form:errors path="father_name" class="text-danger" />
 				</div>
@@ -77,7 +77,7 @@
 				<div class="col-md-6" align="left">
 
 					<form:input type="text" path="mother_name" class="form-control"
-						placeholder="Mother's Name:" />
+						placeholder="Mother's Name:" required="true" />
 
 					<form:errors path="mother_name" class="text-danger" />
 				</div>
@@ -85,7 +85,7 @@
 				<div class="col-md-12" align="left">
 
 					<form:input type="text" path="address" class="form-control"
-						placeholder="Address:" />
+						placeholder="Address:" required="true" />
 
 					<form:errors path="address" class="text-danger" />
 				</div>
@@ -113,7 +113,7 @@
 				<div class="col-md-6" align="left">
 
 					<form:input type="email" path="email" class="form-control"
-						placeholder="Registered Email:" />
+						placeholder="Registered Email:" required="true" />
 
 					<form:errors path="email" class="text-danger" />
 				</div>
@@ -121,8 +121,8 @@
 
 				<div class="col-md-6" align="left">
 
-					<form:input type="text" path="phone_number" class="form-control"
-						placeholder="Registered Phone Number:" />
+					<form:input type="number" path="phone_number" class="form-control"
+						placeholder="Registered Phone Number:" required="true" />
 
 					<form:errors path="phone_number" class="text-danger" />
 				</div>
@@ -131,7 +131,7 @@
 				<div class="col-md-12" align="left">
 
 					<form:input type="password" path="password" class="form-control"
-						placeholder="Password:" />
+						placeholder="Password:" required="true" />
 
 					<form:errors path="password" class="text-danger" />
 				</div>
@@ -140,10 +140,10 @@
 				<div align="center">
 					<div class="form-check form-switch col-lg-7">
 						<form:checkbox path="termsAndConditionsChecked"
-							class="form-check-input" id="checkbox" />
+							class="form-check-input" id="checkbox" required="true" />
 
-						<label for="checkbox"> I Agree to the <a class="link"
-							href="#">Terms &amp; Conditions</a>
+						<label for="checkbox"> I Agree to the <a
+							class="link-primary">Terms &amp; Conditions</a>
 						</label>
 
 					</div>
@@ -227,5 +227,11 @@
 			</form:form>
 		</div>
 	</section>
+
+
+	<!-- termsAndCondition Modal -->
+
+
+
 </body>
 </html>

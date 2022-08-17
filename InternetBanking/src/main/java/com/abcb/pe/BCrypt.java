@@ -16,6 +16,10 @@ package com.abcb.pe;
 
 
 /*
+* 
+* Remarks: 
+* Md Abdul Motin
+* 
 * I have taken this code from Spring Security code base 
 * to encode password without using the whole module.
 * 

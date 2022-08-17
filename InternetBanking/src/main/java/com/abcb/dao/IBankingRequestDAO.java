@@ -18,4 +18,7 @@ public interface IBankingRequestDAO {
 	IBankingRequestDTO getPendingIBankingRequestsByAccountNumber(String account_number);
 	IBankingRequestDTO getStoredInfoToVerifyRequest(String account_number);
 	boolean requestExists(String account_number);
+	
+	IBankingRequestDTO rejectIBankingRequest(String account_number);
+	IBankingRequestDTO acceptIBankingRequest(String account_number);
 }

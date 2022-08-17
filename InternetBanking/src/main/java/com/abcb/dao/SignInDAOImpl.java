@@ -2,6 +2,7 @@ package com.abcb.dao;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.jboss.logging.Logger;
@@ -10,6 +11,7 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.abcb.dto.AccountInfoDTO;
 import com.abcb.dto.SessionDTO;
 import com.abcb.dto.SignInDTO;
 import com.abcb.pe.PasswordEncoder;
@@ -58,19 +60,46 @@ public class SignInDAOImpl implements SignInDAO {
 	}
 
 	@Override
-	public void setSession(int user_id, HttpSession session) {
+	public boolean setSession(int user_id, HttpSession session) {
 
-		String sql = "SELECT name, phone_number, email, permission_type, frozen FROM internet_banking.user_info WHERE user_id = "
-				+ user_id;
+		String sql = "SELECT * FROM internet_banking.user_info WHERE user_id = " + user_id;
 		List<SessionDTO> list = jdbcTemplate.query(sql, new BeanPropertyRowMapper<SessionDTO>(SessionDTO.class));
 		SessionDTO sessionInfo = list.get(0);
 
+		if (sessionInfo.getFrozen().equals("yes")) {
+			return true;
+		}
 		session.setAttribute("user_id", user_id);
 		session.setAttribute("name", sessionInfo.getName());
-		session.setAttribute("email", sessionInfo.getEmail());
+		session.setAttribute("father_name", sessionInfo.getFather_name());
+		session.setAttribute("mother_name", sessionInfo.getMother_name());
+		session.setAttribute("date_of_birth", sessionInfo.getDate_of_birth());
+		session.setAttribute("address", sessionInfo.getAddress());
 		session.setAttribute("phone_number", sessionInfo.getPhone_number());
+		session.setAttribute("email", sessionInfo.getEmail());
 		session.setAttribute("permission_type", sessionInfo.getPermission_type());
-		session.setAttribute("frozen", sessionInfo.getFrozen());
+
+//		session.setAttribute("frozen", sessionInfo.getFrozen());
+
+		sql = "SELECT * FROM internet_banking.bank_accounts WHERE user_id = ?";
+		List<AccountInfoDTO> bankAccounts = jdbcTemplate.query(sql,
+				new BeanPropertyRowMapper<AccountInfoDTO>(AccountInfoDTO.class), user_id);
+
+//		if the user is an administrative user ie. admin, manager etc
+//		they will not have a bank account with their official email
+//		so the bankAccount size will be 0.
+//		then there will be no need to set account balance & account number
+//		to the session object
+
+		if (bankAccounts.size() != 0) {
+			AccountInfoDTO accountInfo = bankAccounts.get(0);
+
+			logger.info("Account Balance is: " + accountInfo.getBalance());
+			session.setAttribute("account_number", accountInfo.getAccount_number());
+
+			session.setAttribute("balance", accountInfo.getBalance());
+		}
+		return false;
 	}
 
 	private void logSignIn(int user_id) {
@@ -96,5 +125,18 @@ public class SignInDAOImpl implements SignInDAO {
 			logger.info(args[1] + " activity rocording failed for user " + args[0]);
 		}
 	}
+//
+//	@Override
+//	public boolean isAccountFrozen(String user_id) {
+//		
+//		String sql = "SELECT account_number FROM internet_banking.bank_accounts WHERE user_id = ?";
+//		
+//		List<AccountInfoDTO> accounts = jdbcTemplate.query(sql,
+//				new BeanPropertyRowMapper<AccountInfoDTO>(AccountInfoDTO.class), user_id);
+//		AccountInfoDTO accountInfo = accounts.get(0);
+//		
+//		if(accountInfo.fr)
+//		return false;
+//	}
 
 }

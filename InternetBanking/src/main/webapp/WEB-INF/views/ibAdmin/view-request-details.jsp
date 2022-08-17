@@ -106,7 +106,7 @@
 
 		<br />
 
-		<div class="fs-5">
+		<div class="fs-4">
 			<span class="fw-bold">Account Number: </span>
 			${receivedInfo.account_number }
 		</div>
@@ -118,12 +118,12 @@
 		<div align="center">
 
 			<br /> <a class="btn btn-danger"
-				href="confirm-choice?request=${request}"
+				href="/InternetBanking/ibanking-request-response/${receivedInfo.account_number}/reject"
 				onclick="if(!(confirm('Do you want to REJECT the request of ${receivedInfo.name}, Account No: ${receivedInfo.account_number}?'))) return false">Reject</a>
 
 			<a class="btn btn-success"
-				href="updaterequestInfoForm?requestId=${receivedInfo.user_id}"
-				onclick="if(!(confirm('Do you want to ACCEPT the request of ${receivedInfo.name}, Account No: ${receivedInfo.account_number}?'))) return false">
+				href="/InternetBanking/ibanking-request-response/${receivedInfo.account_number}/activate"
+				onclick="if(!(confirm('Do you want to ACTIVATE the iBanking Account of ${receivedInfo.name}, Account No: ${receivedInfo.account_number}?'))) return false">
 				Activate</a>
 		</div>
 
