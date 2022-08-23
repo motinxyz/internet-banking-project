@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" isELIgnored="false"%>
-<%@include file="user-header.jsp"%>
+<%@include file="teller-header.jsp"%>
 
 
 <!DOCTYPE html>
@@ -52,9 +52,9 @@ body {
 
 			<br />
 
-			<div>
+			<%-- 			<div>
 				<span class="fw-bold">Account Number: </span> &nbsp;${account_number }
-			</div>
+			</div> --%>
 
 			<div>
 				<span class="fw-bold">Name: </span> &nbsp; &nbsp; &nbsp; &nbsp;

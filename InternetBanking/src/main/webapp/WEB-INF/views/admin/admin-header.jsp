@@ -43,8 +43,11 @@
 					aria-current="page" href="/InternetBanking/">Home</a></li>
 
 				<li class="nav-item"><a class="nav-link"
-					href="/InternetBanking/pending-ibanking-requests">iBanking
-						Requests</a></li>
+					href="/InternetBanking/transact">Transact</a></li>
+
+				<!-- 				<li class="nav-item"><a class="nav-link"
+					href="/InternetBanking/#">Withdraw</a></li> -->
+
 
 				<li class="nav-item"><a class="nav-link"
 					href="/InternetBanking/contact-us">Contact Us</a></li>

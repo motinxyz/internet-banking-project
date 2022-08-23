@@ -91,7 +91,7 @@
 
 				<div class="col-lg-9">
 					<p class="fw-bolder">
-						If you already have an account with us, you can request for
+						If you already have a bank account with us, you can request for
 						iBanking Activation from <a href="ibanking-request"
 							class="link-secondary">iBanking Request</a>
 					</p>

@@ -31,14 +31,15 @@
 			URL</div>
 
 
-		<div class="container text-center"
-			style="margin-top: 30px; box-shadow: 3px 3px 15px;">
+		<!-- 		<div class="container text-center"
+			style="margin-top: 30px; box-shadow: 3px 3px 15px;"> -->
 
-			<h1 class="fs-2 text-danger">Sorry!</h1>
-			<h2 class="fs-2 text-danger">We could not find the page you are
-				looking for!</h2>
+		<hr>
 
-		</div>
+		<h1 class="fs-3 ">Sorry!</h1>
+		<h2 class="fs-3 ">We could not find the page you are looking for!</h2>
+
+		<!-- 		</div> -->
 
 	</div>
 

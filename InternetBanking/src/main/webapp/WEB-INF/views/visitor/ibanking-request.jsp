@@ -24,11 +24,11 @@
 
 .link {
 	text-decoration: none;
-	transition: text-decoration 0.5s;
 }
 
 .link:hover {
 	text-decoration: underline;
+	transition: 0.15s;
 }
 </style>
 
@@ -52,7 +52,7 @@
 				<div class="col-md-6" align="left">
 
 					<form:input type="text" path="name" class="form-control"
-						placeholder="Your Name:" required="true"/>
+						placeholder="Your Name:" required="true" />
 
 					<form:errors path="name" class="text-danger" />
 				</div>
@@ -143,7 +143,7 @@
 							class="form-check-input" id="checkbox" required="true" />
 
 						<label for="checkbox"> I Agree to the <a
-							class="link-primary">Terms &amp; Conditions</a>
+							class="link-primary" href="#">Terms &amp; Conditions</a>
 						</label>
 
 					</div>

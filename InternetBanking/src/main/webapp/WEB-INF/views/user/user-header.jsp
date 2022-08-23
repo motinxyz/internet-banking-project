@@ -90,7 +90,7 @@
 							href="/InternetBanking/security-info">Security Info</a></li>
 
 						<li><a class="dropdown-item"
-							href="/InternetBanking/change-password">Change Password</a></li>
+							href="/InternetBanking/update-password">Update Password</a></li>
 
 
 						<li><hr class="dropdown-divider"></li>
