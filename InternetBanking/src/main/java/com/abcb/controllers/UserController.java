@@ -1,5 +1,7 @@
 package com.abcb.controllers;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.abcb.dao.UserDAOImpl;
+import com.abcb.dto.LoggedTransactionsDTO;
 import com.abcb.dto.UpdatePasswordDTO;
 
 @Controller
@@ -107,5 +110,25 @@ public class UserController {
 		}
 
 		return permissionType + "/update-password";
+	}
+
+	@RequestMapping("transaction-histories")
+	String getTransactionHistories(HttpSession session, Model model) {
+
+		Object permissionType = session.getAttribute("permission_type");
+
+		if (permissionType == null) {
+
+			return "visitor/page-not-found";
+		} else if (permissionType.toString().equals("user")) {
+
+			List<LoggedTransactionsDTO> transactionHistories = userDAOImpl
+					.getTransactionHistories(session.getAttribute("account_number").toString());
+			model.addAttribute("transactionHistories", transactionHistories);
+			
+			return permissionType+"/transaction-histories";
+		}
+		
+		return permissionType+"/page-not-found";
 	}
 }

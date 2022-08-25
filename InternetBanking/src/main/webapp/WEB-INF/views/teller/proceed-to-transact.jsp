@@ -2,10 +2,10 @@
 	pageEncoding="UTF-8" isELIgnored="false"%>
 <%@include file="teller-header.jsp"%>
 
-
-
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%><!DOCTYPE html>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">

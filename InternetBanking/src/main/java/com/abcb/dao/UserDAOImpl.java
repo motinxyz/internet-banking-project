@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.abcb.dto.LoggedTransactionsDTO;
 import com.abcb.dto.SignInDTO;
 import com.abcb.pe.BCryptPasswordEncoder;
 
@@ -54,6 +55,18 @@ public class UserDAOImpl implements UserDAO {
 			return true;
 		}
 		return false;
+	}
+
+
+	@Override
+	public List<LoggedTransactionsDTO> getTransactionHistories(String account_number) {
+		
+		String sql = "SELECT * FROM internet_banking.transaction_logs WHERE account_number = '"+account_number+"' ORDER BY transaction_time DESC";
+		List<LoggedTransactionsDTO> transactionLogs = jdbcTemplate.query(sql,
+				new BeanPropertyRowMapper<LoggedTransactionsDTO>(LoggedTransactionsDTO.class));
+
+		return transactionLogs;
+		
 	}
 
 }

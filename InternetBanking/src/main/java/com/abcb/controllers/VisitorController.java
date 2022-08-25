@@ -1,6 +1,9 @@
 package com.abcb.controllers;
 
+import java.io.IOException;
+
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -33,18 +36,25 @@ public class VisitorController {
 	IBankingRequestDAOImpl iBankingRequestDAO;
 
 	@RequestMapping("/")
-	String getHomepage(HttpSession session) {
+	String getHomepage(HttpSession session, HttpServletRequest request, HttpServletResponse response)
+			throws IOException {
 
 //		String permissionType = permissionTypeFinder.getPermissionType(session);
 		Object permissionType = session.getAttribute("permission_type");
 		logger.info("HomeController -> getHomepage -> Permission Type: " + permissionType);
 
 		if (session.getAttribute("permission_type") == null) {
+
 			return groupURL + "visitor-home";
 		}
 
-		else {
+		else if (permissionType.toString().equals("manager")) {
 
+			response.sendRedirect("cash-reserve");
+			return permissionType + "/" + permissionType + "-home";
+		} else {
+			
+			
 			return permissionType + "/" + permissionType + "-home";
 		}
 	}

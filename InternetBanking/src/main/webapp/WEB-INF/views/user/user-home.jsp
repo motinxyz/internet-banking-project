@@ -36,8 +36,9 @@
 						style="width: 20%; font-size: 15px; vertical-align: middle;">TITLE</th>
 					<th class="table-dark" scope="col"
 						style="width: 20%; font-size: 15px; vertical-align: middle;">BALANCE</th>
-					<th class="table-dark" scope="col"
-						style="width: 8%; font-size: 15px; vertical-align: middle;">ACTION</th>
+					<th class="table-dark align-middle" scope="col"
+						style="width: 20%; font-size: 15px; vertical-align: middle;">TRANSACTION
+						HISTORIES</th>
 
 				</tr>
 			</thead>
@@ -47,7 +48,10 @@
 					<td>${account_number }</td>
 					<td>${name }</td>
 					<td>${balance }</td>
-					<td></td>
+					<td align="center"><a class="text-dark"
+						href="/InternetBanking/transaction-histories"> <i
+							class="bi bi-file-break"></i>
+					</a></td>
 				</tr>
 
 			</tbody>

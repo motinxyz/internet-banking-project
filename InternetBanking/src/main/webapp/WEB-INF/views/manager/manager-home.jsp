@@ -15,9 +15,6 @@
 <style type="text/css">
 .container {
 	background: white;
-	box-shadow: 15px 15px 20px;
-	border-radius: 15px;
-	box-shadow: 15px 15px 30px;
 	margin-top: 90px;
 	padding-top: 50px;
 	padding-bottom: 50px;
@@ -26,37 +23,40 @@
 
 </head>
 
-<%-- <body>
+<body>
 
-	<div class="container col-lg-7" align="center">
+	<div class="container col-lg-8 " align="center">
 
-		<div class="fs-3 text-center text-decoration-underline">TRANSACT</div>
+		<table class="col-lg-8 table table-bordered table-fixed">
 
-		<br />
+			<caption>Cash Reserve</caption>
 
-		<div class="col-lg-7" align="center">
+			<thead>
+				<tr class="">
 
-			<nav class="navbar bg-light d-flex justify-content-center">
-				<div class="container-fluid">
+					<th class="table-dark" scope="col"
+						style="width: 20%; font-size: 15px; vertical-align: middle;">CASH
+						RESERVE</th>
+					<th class="table-dark" scope="col"
+						style="width: 20%; font-size: 15px; vertical-align: middle;">CASH
+						DEPOSITED</th>
+					<th class="table-dark" scope="col"
+						style="width: 20%; font-size: 15px; vertical-align: middle;">CASH
+						WITHDRAWN</th>
+				</tr>
+			</thead>
+			<tbody>
 
-					<form:form action="search-user-for-transacting"
-						modelAttribute="searchDTO" class="d-flex" role="search">
+				<tr>
+					<td>${cashStat.cash_reserve }</td>
+					<td>${cashStat.cash_deposited }</td>
+					<td>${cashStat.cash_withdrawn }</td>
+				</tr>
 
-						<form:input path="account_number"
-							class="form-control me-2 col-md-10" type="search"
-							placeholder="Account Number:" aria-label="Search" />
+			</tbody>
+		</table>
 
-						<button class="btn btn-outline-dark" type="submit">Search</button>
-						<form:errors path="account_number"></form:errors>
-					</form:form>
+	</div>
 
-				</div>
-			</nav>
-
-		</div>
-
-
-
-	</div> --%>
 </body>
 </html>

@@ -43,7 +43,14 @@
 					aria-current="page" href="/InternetBanking/">Home</a></li>
 
 				<li class="nav-item"><a class="nav-link"
-					href="/InternetBanking/transact">Transact</a></li>
+					href="/InternetBanking/employees">Employees</a></li>
+
+				<li class="nav-item"><a class="nav-link"
+					href="/InternetBanking/users">Users</a></li>
+
+				<li class="nav-item"><a class="nav-link"
+					href="/InternetBanking/add-teller">Add Teller</a></li>
+
 
 				<!-- 				<li class="nav-item"><a class="nav-link"
 					href="/InternetBanking/#">Withdraw</a></li> -->

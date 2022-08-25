@@ -24,7 +24,7 @@
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
 	<div class="container-fluid">
-		<a class="navbar-brand" href="/InternetBanking/"> <i
+		<a class="navbar-brand" href="/InternetBanking/cash-reserve"> <i
 			class="bi bi-bank"> | ABCB</i>
 		</a>
 
@@ -40,11 +40,20 @@
 			<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
 				<li class="nav-item"><a class="nav-link active"
-					aria-current="page" href="/InternetBanking/">Home</a></li>
+					aria-current="page" href="/InternetBanking/cash-reserve">Home</a></li>
 
 				<li class="nav-item"><a class="nav-link"
-					href="/InternetBanking/transact">Transact</a></li>
+					href="/InternetBanking/employees">Employees</a></li>
 
+				<li class="nav-item"><a class="nav-link"
+					href="/InternetBanking/users">Users</a></li>
+
+
+				<li class="nav-item"><a class="nav-link"
+					href="/InternetBanking/transaction-logs">Transactions</a></li>
+
+				<li class="nav-item"><a class="nav-link"
+					href="/InternetBanking/activity-logs">Activities</a></li>
 				<!-- 				<li class="nav-item"><a class="nav-link"
 					href="/InternetBanking/#">Withdraw</a></li> -->
 

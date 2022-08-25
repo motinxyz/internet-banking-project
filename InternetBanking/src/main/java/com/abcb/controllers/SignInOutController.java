@@ -85,6 +85,7 @@ public class SignInOutController {
 //				permissionType = session.getAttribute("permission_type").toString();
 
 				permissionType = session.getAttribute("permission_type");
+				response.sendRedirect("/InternetBanking/");
 				return permissionType + "/" + permissionType + "-home";
 
 //			logger.info("Request Forward to home was unsuccessful");
